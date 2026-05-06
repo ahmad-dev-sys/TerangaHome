@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>TerangaHome · Enquête logement étudiant étranger Sénégal</title>
+  <!-- Google Fonts + Font Awesome 6 (gratuit) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(145deg, #fef7e8 0%, #f3ebd2 100%);
+      font-family: 'Inter', sans-serif;
+      padding: 2rem 1rem;
+      color: #2c2b26;
+    }
+
+    /* conteneur principal */
+    .survey-container {
+      max-width: 950px;
+      margin: 0 auto;
+    }
+
+    /* header avec identité TerangaHome */
+    .hero {
+      background: linear-gradient(135deg, #c97e2c, #e09d3e);
+      border-radius: 2rem;
+      padding: 2rem 2rem 1.8rem;
+      margin-bottom: 2rem;
+      color: white;
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.25);
+      transition: all 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "🏠✨";
+      font-size: 140px;
+      opacity: 0.08;
+      position: absolute;
+      bottom: -20px;
+      right: -20px;
+      pointer-events: none;
+    }
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .hero h1 i {
+      background: #ffd966;
+      padding: 10px 12px;
+      border-radius: 60px;
+      color: #c46b1a;
+      font-size: 1.6rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .hero p {
+      margin-top: 0.9rem;
+      font-size: 1rem;
+      opacity: 0.95;
+      max-width: 85%;
+    }
+    .teranga-badge {
+      background: rgba(255, 242, 209, 0.25);
+      backdrop-filter: blur(4px);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      margin-top: 1rem;
+      font-weight: 500;
+    }
+
+    /* formulaire carte principale */
+    .form-card {
+      background: #fffffffa;
+      border-radius: 2rem;
+      box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      backdrop-filter: blur(0px);
+    }
+
+    form {
+      padding: 2rem 2rem 2rem;
+    }
+
+    /* sections */
+    .section {
+      margin-bottom: 2rem;
+      border-bottom: 1px solid #f0e4cc;
+      padding-bottom: 1.6rem;
+    }
+    .section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 1.3rem;
+      color: #b45f1b;
+    }
+    .section-title i {
+      background: #fef1df;
+      padding: 10px;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      color: #c0702a;
+    }
+
+    .form-group {
+      margin-bottom: 1.3rem;
+    }
+
+    label {
+      font-weight: 500;
+      display: block;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+      color: #3d3a31;
+    }
+
+    .required-star {
+      color: #e67e22;
+      margin-left: 3px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px 16px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      border: 1.5px solid #eadbbe;
+      border-radius: 1.2rem;
+      background: #fefcf8;
+      transition: 0.2s;
+      outline: none;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #e09d3e;
+      box-shadow: 0 0 0 3px rgba(224, 157, 62, 0.25);
+    }
+
+    .radio-group, .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 8px;
+    }
+
+    .radio-option, .checkbox-option {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #fef7ef;
+      padding: 8px 16px;
+      border-radius: 2rem;
+      border: 1px solid #f0e0ca;
+      cursor: pointer;
+      transition: 0.1s;
+    }
+
+    .radio-option:hover, .checkbox-option:hover {
+      background: #fff0e0;
+      border-color: #e0b073;
+    }
+
+    input[type="radio"], input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: #c97e2c;
+      margin: 0;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 85px;
+    }
+
+    .btn-submit {
+      background: linear-gradient(105deg, #c0702a, #de933b);
+      border: none;
+      padding: 1rem 1.8rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: white;
+      border-radius: 3rem;
+      width: 100%;
+      cursor: pointer;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 1.2rem;
+      box-shadow: 0 8px 18px rgba(193, 115, 33, 0.25);
+    }
+
+    .btn-submit:hover {
+      background: linear-gradient(105deg, #a55d21, #c57f32);
+      transform: translateY(-2px);
+    }
+
+    .btn-submit:active {
+      transform: translateY(1px);
+    }
+
+    /* message status */
+    .form-status {
+      margin-top: 1.3rem;
+      text-align: center;
+      font-weight: 500;
+      padding: 12px;
+      border-radius: 60px;
+      display: none;
+    }
+
+    .form-status.success {
+      background: #e1f7e3;
+      color: #2b6e2f;
+      display: block;
+    }
+
+    .form-status.error {
+      background: #ffe2dd;
+      color: #bc3900;
+      display: block;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.75rem;
+      color: #8b7a62;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 640px) {
+      form {
+        padding: 1.3rem;
+      }
+      .grid-2 {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+      }
+      .hero h1 {
+        font-size: 1.7rem;
+      }
+      .hero p {
+        max-width: 100%;
+      }
+      .section-title {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="survey-container">
+  <div class="hero">
+    <h1>
+      <i class="fas fa-hand-sparkles"></i> 
+      TerangaHome 🏡
+    </h1>
+    <p><strong>Teranga</strong> – l’hospitalité sénégalaise légendaire. Aidez-nous à construire la première plateforme dédiée aux étudiants étrangers : logements fiables, meubles et communauté.</p>
+    <div class="teranga-badge">
+      <i class="fas fa-graduation-cap"></i> Enquête terrain · 100% anonyme · <i class="fas fa-clock"></i> 5 min
+    </div>
+  </div>
+
+  <div class="form-card">
+    <!-- Formulaire avec action Formspree corrigée + ID terangahome (maqvbblw) -->
+    <form id="terangaForm" action="https://formspree.io/f/maqvbblw" method="POST">
+      <!-- champs cachés pour améliorer l'expérience email -->
+      <input type="hidden" name="_subject" value="[TerangaHome] Nouvelle réponse enquête logement étudiant">
+      <input type="hidden" name="_replyto" value="etudiant@terangahome.sn">
+      <input type="hidden" name="_captcha" value="false">
+      
+      <!-- ========= SECTION 1 : IDENTIFICATION ========= -->
+      <div class="section">
+        <div class="section-title">
+          <i class="fas fa-user-astronaut"></i>
+          <span>1. Parcours & profil</span>
+        </div>
+        <div class="form-group">
+          <label>Genre <span class="required-star">*</span></label>
+          <div class="radio-group" id="gender-group">
+            <label class="radio-option"><input type="radio" name="Genre" value="Homme" required> Homme</label>
+            <label class="radio-option"><input type="radio" name="Genre" value="Femme"> Femme</label>
+            <label class="radio-option"><input type="radio" name="Genre" value="Autre / préfère ne pas dire"> Autre / préfère ne pas dire</label>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Âge <span class="required-star">*</span></label>
+            <select name="Age" required>
+              <option value="">Sélectionnez</option>
+              <option>Moins de 18 ans</option>
+              <option>18-22 ans</option>
+              <option>23-27 ans</option>
+              <option>28-32 ans</option>
+              <option>Plus de 32 ans</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Pays d'origine <span class="required-star">*</span></label>
+            <input type="text" name="Pays_origine" placeholder="Ex: France, Côte d'Ivoire, Maroc, Guinée..." required>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Durée au Sénégal</label>
+            <select name="Duree_Senegal">
+              <option value="">Sélectionnez</option>
+              <option>Moins de 3 mois</option>
+              <option>3-6 mois</option>
+              <option>6 mois - 1 an</option>
+              <option>1-3 ans</option>
+              <option>Plus de 3 ans</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Ville d'étude <span class="required-star">*</span></label>
+            <select name="Ville_etude" required>
+              <option value="">Choisir</option>
+              <option>Dakar</option>
+              <option>Thiès</option>
+              <option>Saint-Louis</option>
+              <option>Diourbel</option>
+              <option>Autre (précisez dans témoignage)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Statut académique</label>
+          <select name="Statut_academique">
+            <option value="">Sélectionnez</option>
+            <option>Étudiant en licence</option>
+            <option>Étudiant en master</option>
+            <option>Étudiant en doctorat</option>
+            <option>Langue / formation professionnelle</option>
+            <option>Autre</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- ========= SECTION 2 : HABITATION ACTUELLE ========= -->
+      <div class="section">
+        <div class="section-title">
+          <i class="fas fa-home"></i>
+          <span>2. Où vivez-vous actuellement ?</span>
+        </div>
+        <div class="form-group">
+          <label>Type de logement</label>
+          <select name="Type_logement">
+            <option value="">Sélectionnez</option>
+            <option>Chambre chez l'habitant</option>
+            <option>Studio / appartement seul</option>
+            <option>Colocation avec étudiants</option>
+            <option>Résidence universitaire (CROUS/autre)</option>
+            <option>Chez parent/tuteur</option>
+            <option>Hôtel / auberge temporaire</option>
+            <option>Autre</option>
+          </select>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Loyer mensuel (CFA)</label>
+            <select name="Loyer_mensuel">
+              <option value="">Sélectionnez</option>
+              <option>Moins de 50 000 CFA</option>
+              <option>50 000 - 75 000 CFA</option>
+              <option>75 000 - 100 000 CFA</option>
+              <option>100 000 - 150 000 CFA</option>
+              <option>Plus de 150 000 CFA</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Comment l'avez-vous trouvé ?</label>
+            <select name="Methode_recherche">
+              <option value="">Choisir</option>
+              <option>Bouche à oreille / ami</option>
+              <option>Petites annonces (Facebook, WhatsApp)</option>
+              <option>Agence immobilière</option>
+              <option>Site internet</option>
+              <option>Affichage dans la rue</option>
+              <option>Autre</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- ========= SECTION 3 : DIFFICULTÉS (multichoix) ========= -->
+      <div class="section">
+        <div class="section-title">
+          <i class="fas fa-exclamation-triangle"></i>
+          <span>3. Difficultés rencontrées (plusieurs choix)</span>
+        </div>
+        <div class="form-group">
+          <label>Quelles galères avez-vous rencontrées ? (cochez tout ce qui s'applique)</label>
+          <div class="checkbox-group" id="difficultiesGroup">
+            <label class="checkbox-option"><input type="checkbox" name="Difficultes" value="Difficulte trouver rapidement"> ⏳ Trouver rapidement</label>
+            <label class="checkbox-option"><input type="checkbox" name="Difficultes" value="Loyers trop chers"> 💰 Loyers trop chers</label>
+            <label class="checkbox-option"><input type="checkbox" name="Difficultes" value="Arnaques fausses annonces"> 🚨 Arnaques / fausses annonces</label>
+            <label class="checkbox-option"><input type="checkbox" name="Difficultes" value="Bailleurs non reactifs"> 📵 Bailleurs fantômes</label>
+            <label class="checkbox-option"><input type="checkbox" name="Difficultes" value="Logement insalubre"> 🏚️ Logement insalubre</label>
+            <label class="checkbox-option"><input type="checkbox" name="Difficultes" value="Insécurité quartier"> 🔒 Insécurité quartier</label>
+            <label class="checkbox-option"><input type="checkbox" name="Difficultes" value="Coupures eau/electricite"> 💧 Coupures eau/électricité</label>
+            <label class="checkbox-option"><input type="checkbox" name="Difficultes" value="Garanties complexes"> 📄 Documents/garanties</label>
+            <label class="checkbox-option"><input type="checkbox" name="Difficultes" value="Barriere langue"> 🗣️ Barrière de langue / mentalité</label>
+            <label class="checkbox-option"><input type="checkbox" name="Difficultes" value="Eloignement université"> 🚌 Éloignement université</label>
+            <label class="checkbox-option"><input type="checkbox" name="Difficultes" value="Pas de contrat"> 📝 Pas de contrat écrit</label>
+            <label class="checkbox-option"><input type="checkbox" name="Difficultes" value="Refus nationalite"> 🌍 Refus à cause nationalité</label>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label>Temps de recherche estimé</label>
+            <select name="Temps_recherche">
+              <option value="">Sélectionnez</option>
+              <option>Moins d'une semaine</option>
+              <option>1 à 2 semaines</option>
+              <option>3 à 4 semaines</option>
+              <option>1 à 3 mois</option>
+              <option>Plus de 3 mois</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Victime d'arnaque ?</label>
+            <select name="Arnaque_subie">
+              <option value="">Choisir</option>
+              <option>Oui</option>
+              <option>Non</option>
+              <option>Je préfère ne pas répondre</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Si arnaque ou vécu particulier, décrivez brièvement (optionnel)</label>
+          <textarea name="Description_arnaque" placeholder="Ex: on m'a demandé un acompte sans visite..."></textarea>
+        </div>
+      </div>
+
+      <!-- ========= SECTION 4 : ATTENTES & SOLUTIONS ========= -->
+      <div class="section">
+        <div class="section-title">
+          <i class="fas fa-lightbulb"></i>
+          <span>4. Ce qui vous aiderait vraiment (TerangaHome)</span>
+        </div>
+        <div class="form-group">
+          <label>Qu'est-ce qui vous rassurerait le plus ? (choix unique prioritaire)</label>
+          <select name="Fonction_rassurante">
+            <option value="">Sélectionnez</option>
+            <option>Vidéo du logement avant de me déplacer</option>
+            <option>Contact direct WhatsApp avec le bailleur</option>
+            <option>Prix clair et sans surprise</option>
+            <option>Contrat écrit et reçu de caution</option>
+            <option>Notation des bailleurs par étudiants</option>
+            <option>Quartier sûr / commerces à proximité</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Payeriez-vous ~1000-2000 CFA pour contacter un bailleur vérifié ?</label>
+          <div class="radio-group">
+            <label class="radio-option"><input type="radio" name="Paiement_contact" value="Oui"> Oui, volontiers</label>
+            <label class="radio-option"><input type="radio" name="Paiement_contact" value="Non"> Non, trop cher</label>
+            <label class="radio-option"><input type="radio" name="Paiement_contact" value="Peut-etre"> Peut-être si très fiable</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Une section meubles (lit, table, gaz, équipements) sur la même plateforme vous serait utile ?</label>
+          <div class="radio-group">
+            <label class="radio-option"><input type="radio" name="Interet_meubles" value="Oui très utile"> Oui, gain de temps</label>
+            <label class="radio-option"><input type="radio" name="Interet_meubles" value="Non je prefere ailleurs"> Non, je préfère gérer à part</label>
+            <label class="radio-option"><input type="radio" name="Interet_meubles" value="Peut-etre pratique"> Peut-être, selon les prix</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Quels services supplémentaires souhaiteriez-vous ? (idées libres)</label>
+          <textarea name="Services_souhaites" placeholder="Ex: assistance juridique, communauté whatsapp, signalement arnaques, paiement caution safe..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Recommanderiez-vous TerangaHome à d'autres étudiants étrangers ?</label>
+          <select name="Recommandation">
+            <option value="">Sélectionnez</option>
+            <option>Oui, sans hésiter</option>
+            <option>Oui, si c’est gratuit ou peu cher</option>
+            <option>Peut-être, je dois d'abord voir le site</option>
+            <option>Non</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- ========= SECTION 5 : OPTIONNEL CONTACT & TÉMOIGNAGE ========= -->
+      <div class="section">
+        <div class="section-title">
+          <i class="fas fa-comment-dots"></i>
+          <span>5. Partager votre voix (optionnel mais précieux)</span>
+        </div>
+        <div class="form-group">
+          <label>WhatsApp (si OK pour un petit entretien terrain)</label>
+          <input type="text" name="Whatsapp_contact" placeholder="+221 77 xxx xx xx ou autre indicatif">
+          <small style="display:block; margin-top:5px; opacity:0.7;">🔒 Utilisé uniquement pour améliorer TerangaHome</small>
+        </div>
+        <div class="form-group">
+          <label>Témoignage / anecdote sur votre recherche de logement au Sénégal</label>
+          <textarea name="Temoignage" placeholder="Racontez-nous une histoire vraie : bonne ou mauvaise expérience, un conseil pour les futurs étudiants..."></textarea>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit">
+        <i class="fas fa-paper-plane"></i> Envoyer ma réponse – Aider la communauté
+      </button>
+      <div id="formStatus" class="form-status"></div>
+    </form>
+  </div>
+  <footer>
+    <span><i class="fas fa-heart" style="color:#e09d3e;"></i> TerangaHome – l’hospitalité au service des étudiants</span>
+    <span><i class="fas fa-shield-alt"></i> Données protégées · Enquête utile</span>
+  </footer>
+</div>
+
+<script>
+  (function() {
+    const form = document.getElementById('terangaForm');
+    const statusDiv = document.getElementById('formStatus');
+
+    // Personnalisation de l'envoi via fetch pour avoir un feedback moderne
+    // tout en respectant l'endpoint Formspree (maqvbblw)
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Petite validation simple des champs requis html5 déjà gérée mais on force les radios/genre
+      const genreChecked = document.querySelector('input[name="Genre"]:checked');
+      const ageValue = form.querySelector('select[name="Age"]').value;
+      const paysValue = form.querySelector('input[name="Pays_origine"]').value.trim();
+      const villeValue = form.querySelector('select[name="Ville_etude"]').value;
+
+      if (!genreChecked || !ageValue || !paysValue || !villeValue) {
+        statusDiv.className = 'form-status error';
+        statusDiv.innerText = '⚠️ Merci de remplir tous les champs obligatoires : genre, âge, pays d\'origine et ville d\'étude.';
+        statusDiv.style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+
+      // Récupération des difficultés sous forme lisible
+      const difficulties = Array.from(document.querySelectorAll('#difficultiesGroup input[type="checkbox"]:checked'))
+        .map(cb => cb.value);
+      const difficulteTexte = difficulties.length ? difficulties.join(' ; ') : 'Aucune sélectionnée';
+
+      // Ajouter une variable cachée pour la lisibilité dans l'email (optionnel via FormData)
+      const formData = new FormData(form);
+      // Ajouter une entrée synthétique "Difficultes_synthese" pour avoir la liste dans l'email
+      formData.append('Difficultes_liste', difficulteTexte);
+
+      // Option : récupérer les autres valeurs radio non standards
+      const payContact = document.querySelector('input[name="Paiement_contact"]:checked')?.value || 'Non précisé';
+      const meubleInterest = document.querySelector('input[name="Interet_meubles"]:checked')?.value || 'Non précisé';
+      formData.append('Accepte_paiement_contact', payContact);
+      formData.append('Interet_meubles_plateforme', meubleInterest);
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+          statusDiv.className = 'form-status success';
+          statusDiv.innerHTML = '✅ Merci infiniment ! Votre réponse a été envoyée à TerangaHome. Nous allons analyser vos besoins pour créer la meilleure solution de logement étudiant au Sénégal. <br> 🔜 On vous tient informé !';
+          statusDiv.style.display = 'block';
+          form.reset();
+          // Remise à zéro des groupes radio/checkbox supplémentaires géré par reset
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          const errorText = await response.text();
+          console.warn(errorText);
+          throw new Error('Erreur serveur Formspree');
+        }
+      } catch (err) {
+        console.error(err);
+        statusDiv.className = 'form-status error';
+        statusDiv.innerHTML = '❌ Problème de connexion. Vérifiez votre internet ou réessayez dans quelques instants. Si le problème persiste, contactez-nous via WhatsApp (mentionné dans l’enquête).';
+        statusDiv.style.display = 'block';
+      }
+    });
+  })();
+</script>
+</body>
+</html>
