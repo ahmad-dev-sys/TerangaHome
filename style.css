@@ -1,0 +1,279 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(145deg, #fef7e8 0%, #f3ebd2 100%);
+  font-family: 'Inter', sans-serif;
+  padding: 2rem 1rem;
+  color: #2c2b26;
+}
+
+/* conteneur principal */
+.survey-container {
+  max-width: 950px;
+  margin: 0 auto;
+}
+
+/* header avec identité TerangaHome */
+.hero {
+  background: linear-gradient(135deg, #c97e2c, #e09d3e);
+  border-radius: 2rem;
+  padding: 2rem 2rem 1.8rem;
+  margin-bottom: 2rem;
+  color: white;
+  box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.25);
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "🏠✨";
+  font-size: 140px;
+  opacity: 0.08;
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  pointer-events: none;
+}
+
+.hero h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.hero h1 i {
+  background: #ffd966;
+  padding: 10px 12px;
+  border-radius: 60px;
+  color: #c46b1a;
+  font-size: 1.6rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.hero p {
+  margin-top: 0.9rem;
+  font-size: 1rem;
+  opacity: 0.95;
+  max-width: 85%;
+}
+
+.teranga-badge {
+  background: rgba(255, 242, 209, 0.25);
+  backdrop-filter: blur(4px);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 40px;
+  font-size: 0.8rem;
+  margin-top: 1rem;
+  font-weight: 500;
+}
+
+/* formulaire carte principale */
+.form-card {
+  background: #fffffffa;
+  border-radius: 2rem;
+  box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+form {
+  padding: 2rem 2rem 2rem;
+}
+
+/* sections */
+.section {
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #f0e4cc;
+  padding-bottom: 1.6rem;
+}
+
+.section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 1.3rem;
+  color: #b45f1b;
+}
+
+.section-title i {
+  background: #fef1df;
+  padding: 10px;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  color: #c0702a;
+}
+
+.form-group {
+  margin-bottom: 1.3rem;
+}
+
+label {
+  font-weight: 500;
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  color: #3d3a31;
+}
+
+.required-star {
+  color: #e67e22;
+  margin-left: 3px;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 12px 16px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  border: 1.5px solid #eadbbe;
+  border-radius: 1.2rem;
+  background: #fefcf8;
+  transition: 0.2s;
+  outline: none;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: #e09d3e;
+  box-shadow: 0 0 0 3px rgba(224, 157, 62, 0.25);
+}
+
+.radio-group, .checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 8px;
+}
+
+.radio-option, .checkbox-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fef7ef;
+  padding: 8px 16px;
+  border-radius: 2rem;
+  border: 1px solid #f0e0ca;
+  cursor: pointer;
+  transition: 0.1s;
+}
+
+.radio-option:hover, .checkbox-option:hover {
+  background: #fff0e0;
+  border-color: #e0b073;
+}
+
+input[type="radio"], input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #c97e2c;
+  margin: 0;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 85px;
+}
+
+.btn-submit {
+  background: linear-gradient(105deg, #c0702a, #de933b);
+  border: none;
+  padding: 1rem 1.8rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+  border-radius: 3rem;
+  width: 100%;
+  cursor: pointer;
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 1.2rem;
+  box-shadow: 0 8px 18px rgba(193, 115, 33, 0.25);
+}
+
+.btn-submit:hover {
+  background: linear-gradient(105deg, #a55d21, #c57f32);
+  transform: translateY(-2px);
+}
+
+.btn-submit:active {
+  transform: translateY(1px);
+}
+
+/* message status */
+.form-status {
+  margin-top: 1.3rem;
+  text-align: center;
+  font-weight: 500;
+  padding: 12px;
+  border-radius: 60px;
+  display: none;
+}
+
+.form-status.success {
+  background: #e1f7e3;
+  color: #2b6e2f;
+  display: block;
+}
+
+.form-status.error {
+  background: #ffe2dd;
+  color: #bc3900;
+  display: block;
+}
+
+footer {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 0.75rem;
+  color: #8b7a62;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 640px) {
+  form {
+    padding: 1.3rem;
+  }
+  .grid-2 {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+  .hero h1 {
+    font-size: 1.7rem;
+  }
+  .hero p {
+    max-width: 100%;
+  }
+  .section-title {
+    font-size: 1.2rem;
+  }
+}
